@@ -492,7 +492,11 @@ class GaussianDiffusion:
             x_start=out["pred_xstart"], x_t=x, t=t
         )
         return out
-
+    def test_cond(x, t, p_mean_var, **model_kwargs):
+        print()
+        ten = torch.zeros_like(x)
+        return ten
+    
     def p_sample(
         self,
         model,
@@ -602,14 +606,14 @@ class GaussianDiffusion:
         noise=None,
         clip_denoised=True,
         denoised_fn=None,
-        cond_fn=None,
+        cond_fn=test_cond,
         model_kwargs=None,
         device=None,
         progress=False,
         skip_timesteps=0,
         init_image=None,
         randomize_class=False,
-        cond_fn_with_grad=False,
+        cond_fn_with_grad=True,
         dump_steps=None,
         const_noise=False,
     ):
@@ -724,7 +728,6 @@ class GaussianDiffusion:
                     denoised_fn=denoised_fn,
                     cond_fn=cond_fn,
                     model_kwargs=model_kwargs,
-                    const_noise=const_noise,
                 )
                 yield out
                 img = out["sample"]
