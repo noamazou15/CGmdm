@@ -11,6 +11,7 @@ input_size = 263 * 196
 hidden_size1 = 256
 hidden_size2 = 512 
 
+// Testing comment
 class Classifier(nn.Module):
     def __init__(self, input_size, hidden_size1):
         super(Classifier, self).__init__()
