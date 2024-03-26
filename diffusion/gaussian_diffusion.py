@@ -16,7 +16,6 @@ from copy import deepcopy
 from diffusion.nn import mean_flat, sum_flat
 from diffusion.losses import normal_kl, discretized_gaussian_log_likelihood
 from data_loaders.humanml.scripts import motion_process
-from classifiers.test_classifier import test_cond
 
 def get_named_beta_schedule(schedule_name, num_diffusion_timesteps, scale_betas=1.):
     """
@@ -506,6 +505,7 @@ class GaussianDiffusion:
         cond_fn=None,
         model_kwargs=None,
         const_noise=False,
+       
     ):
         """
         Sample x_{t-1} from the model at the given timestep.
@@ -524,6 +524,7 @@ class GaussianDiffusion:
                  - 'sample': a random sample from the model.
                  - 'pred_xstart': a prediction of x_0.
         """
+        
         out = self.p_mean_variance(
             model,
             x,
@@ -559,6 +560,7 @@ class GaussianDiffusion:
         denoised_fn=None,
         cond_fn=None,
         model_kwargs=None,
+        
     ):
         """
         Sample x_{t-1} from the model at the given timestep.
@@ -577,6 +579,7 @@ class GaussianDiffusion:
                  - 'sample': a random sample from the model.
                  - 'pred_xstart': a prediction of x_0.
         """
+
         with th.enable_grad():
             x = x.detach().requires_grad_()
             out = self.p_mean_variance(
@@ -605,16 +608,17 @@ class GaussianDiffusion:
         noise=None,
         clip_denoised=True,
         denoised_fn=None,
-        cond_fn=test_cond,
+        cond_fn=None,
         model_kwargs=None,
         device=None,
         progress=False,
         skip_timesteps=0,
         init_image=None,
         randomize_class=False,
-        cond_fn_with_grad=True,
+        cond_fn_with_grad=False,
         dump_steps=None,
         const_noise=False,
+       
     ):
         """
         Generate samples from the model.
@@ -655,6 +659,7 @@ class GaussianDiffusion:
             randomize_class=randomize_class,
             cond_fn_with_grad=cond_fn_with_grad,
             const_noise=const_noise,
+            
         )):
             if dump_steps is not None and i in dump_steps:
                 dump.append(deepcopy(sample["sample"]))
@@ -679,6 +684,7 @@ class GaussianDiffusion:
         randomize_class=False,
         cond_fn_with_grad=False,
         const_noise=False,
+    
     ):
         """
         Generate samples from the model and yield intermediate samples from
@@ -727,6 +733,7 @@ class GaussianDiffusion:
                     denoised_fn=denoised_fn,
                     cond_fn=cond_fn,
                     model_kwargs=model_kwargs,
+                  
                 )
                 yield out
                 img = out["sample"]

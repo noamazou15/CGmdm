@@ -16,6 +16,8 @@ from data_loaders.get_data import get_dataset_loader
 from data_loaders.humanml.scripts.motion_process import recover_from_ric
 import data_loaders.humanml.utils.paramUtil as paramUtil
 from data_loaders.humanml.utils.plot_script import plot_3d_motion
+from classifiers.trajectory_condition import arg_to_func
+from time import time
 import shutil
 from data_loaders.tensors import collate
 
@@ -110,6 +112,8 @@ def main():
         if args.guidance_param != 1:
             model_kwargs['y']['scale'] = torch.ones(args.batch_size, device=dist_util.dev()) * args.guidance_param
 
+        cond_fn = arg_to_func(args.cond_fn, data.dataset)
+
         sample_fn = diffusion.p_sample_loop
 
         sample = sample_fn(
@@ -124,6 +128,8 @@ def main():
             dump_steps=None,
             noise=None,
             const_noise=False,
+            cond_fn_with_grad=True if cond_fn is not None else False,
+            cond_fn= cond_fn,
         )
 
         # Recover XYZ *positions* from HumanML3D vector representation
@@ -156,10 +162,8 @@ def main():
     all_text = all_text[:total_num_samples]
     all_lengths = np.concatenate(all_lengths, axis=0)[:total_num_samples]
 
-    k = 0
-    while os.path.exists(out_path):
-        out_path = out_path + f'_{k}'
-        k += 1
+    if os.path.exists(out_path):
+        out_path = out_path + f'_{time()}'
     os.makedirs(out_path)
 
     npy_path = os.path.join(out_path, 'results.npy')
@@ -250,7 +254,7 @@ def load_dataset(args, max_frames, n_frames):
     data = get_dataset_loader(name=args.dataset,
                               batch_size=args.batch_size,
                               num_frames=max_frames,
-                              split='train',
+                              split='test',
                               hml_mode='text_only')
     if args.dataset in ['kit', 'humanml']:
         data.dataset.t2m_dataset.fixed_length = n_frames
