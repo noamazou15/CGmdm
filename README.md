@@ -5,7 +5,7 @@
 <a href="https://replicate.com/arielreplicate/motion_diffusion_model"><img src="https://replicate.com/arielreplicate/motion_diffusion_model/badge"></a>
 
 The  PyTorch implementation of the **Classifier Guided Human Motion Diffusion Model** based on the paper [**"Human Motion Diffusion Model"**](https://arxiv.org/abs/2209.14916).
-The paper report can be found in final_paper.pdf
+The paper report can be found in **final Report.pdf**
 
 more info about mdm:
 Please visit [**webpage**](https://guytevet.github.io/mdm-page/) .
