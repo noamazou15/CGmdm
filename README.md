@@ -1,12 +1,14 @@
-# MDM: Human Motion Diffusion Model
+# CGMDM: Classifier Guided Human Motion Diffusion Model
 
 
 [![arXiv](https://img.shields.io/badge/arXiv-<2209.14916>-<COLOR>.svg)](https://arxiv.org/abs/2209.14916)
 <a href="https://replicate.com/arielreplicate/motion_diffusion_model"><img src="https://replicate.com/arielreplicate/motion_diffusion_model/badge"></a>
 
-The official PyTorch implementation of the paper [**"Human Motion Diffusion Model"**](https://arxiv.org/abs/2209.14916).
+The  PyTorch implementation of the **Classifier Guided Human Motion Diffusion Model** based on the paper [**"Human Motion Diffusion Model"**](https://arxiv.org/abs/2209.14916).
+The paper report can be found in final_paper.pdf
 
-Please visit our [**webpage**](https://guytevet.github.io/mdm-page/) for more details.
+more info about mdm:
+Please visit [**webpage**](https://guytevet.github.io/mdm-page/) .
 
 ![teaser](https://github.com/GuyTevet/mdm-page/raw/main/static/figures/github.gif)
 
@@ -23,37 +25,6 @@ year={2023},
 url={https://openreview.net/forum?id=SJ1kSyO2jwu}
 }
 ```
-
-## Checkout MDM Follow-ups (partial list)
-
-🐉 [SinMDM](https://sinmdm.github.io/SinMDM-page/) - Learns single motion motifs - even for non-humanoid characters.
-
-👯 [PriorMDM](https://priormdm.github.io/priorMDM-page/) - Uses MDM as a generative prior, enabling new generation tasks with few examples or even no data at all.
-
-💃 [MAS](https://guytevet.github.io/mas-page/) - Generating intricate 3D motions (including non-humanoid) using 2D diffusion models trained on in-the-wild videos.
-
-
-## News
-📢 **25/Jan/24** - Fixed bug in evalutation code (#182) - Please use the fixed results when citing MDM.<br>
-![fixed_results](assets/fixed_results_caplen_bug.png)
-
-📢 **1/Jun/23** - Fixed generation issue (#104) - Please pull to improve generation results.
-
-📢 **23/Nov/22** - Fixed evaluation issue (#42) - Please pull and run `bash prepare/download_t2m_evaluators.sh` from the top of the repo to adapt.
-
-📢 **4/Nov/22** - Added sampling, training and evaluation of unconstrained tasks.
-  Note slight env changes adapting to the new code. If you already have an installed environment, run `bash prepare/download_unconstrained_assets.sh; conda install -y -c anaconda scikit-learn
-` to adapt.
-
-📢 **3/Nov/22** - Added in-between and upper-body editing.
-
-📢 **31/Oct/22** - Added sampling, training and evaluation of action-to-motion tasks.
-
-📢 **9/Oct/22** - Added training and evaluation scripts. 
-  Note slight env changes adapting to the new code. If you already have an installed environment, run `bash prepare/download_glove.sh; pip install clearml` to adapt.
-
-📢 **6/Oct/22** - First release - sampling and rendering using pre-trained models.
-
 
 ## Getting started
 
